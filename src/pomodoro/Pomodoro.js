@@ -5,9 +5,6 @@ import PlayPause from "./PlayPause";
 import Timer from "./Timer";
 import useInterval from "../utils/useInterval";
 
-// These functions are defined outside of the component to insure they do not have access to state
-// and are, therefore more likely to be pure.
-
 /**
  * Update the session state with new state after each tick of the interval.
  * @param prevState
@@ -52,9 +49,6 @@ function nextSession(focusDuration, breakDuration) {
 }
 
 function Pomodoro() {
-  // Timer starts out paused
-  // The current session - null where there is no session running
-  // Allow the user to adjust the focus and break duration.
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   const [session, setSession] = useState(null);
   const [focusDuration, setFocusDuration] = useState(25);
@@ -69,10 +63,6 @@ function Pomodoro() {
   const decreaseBreak = () =>
     setBreakDuration((time) => (time > 1 ? time - 1 : time));
 
-  /**
-   * Custom hook that invokes the callback function every second
-   * NOTE: You will not need to make changes to the callback function
-   */
   useInterval(
     () => {
       if (!session) return session;
@@ -90,8 +80,6 @@ function Pomodoro() {
       const nextState = !prevState;
       if (nextState) {
         setSession((prevStateSession) => {
-          // If the timer is starting and the previous session is null,
-          // start a focusing session.
           if (prevStateSession === null) {
             return {
               label: "Focusing",
@@ -105,9 +93,6 @@ function Pomodoro() {
     });
   }
 
-  /**
-   * Called whenever the stop button is clicked.
-   */
   const stopTimer = () => {
     setSession(null);
     setIsTimerRunning(false);
@@ -138,7 +123,6 @@ function Pomodoro() {
           session={session}
         />
         <Timer
-          isTimerRunning={isTimerRunning}
           session={session}
           focusDuration={focusDuration}
           breakDuration={breakDuration}
