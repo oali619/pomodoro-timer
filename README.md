@@ -5,12 +5,14 @@ The Pomodoro Technique is a time management method developed by Francesco Cirill
 
 [Click Here](https://pomodoro-timer-project.vercel.app/)
 
-## TECH STACK
+## Tech Stack
 
 - Javascript
 - React.js
 - Jest
 - Vercel
+
+## Development
 
 Run the following from the root of the directory to install dependencies
 ```
